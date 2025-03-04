@@ -1,15 +1,95 @@
-/* Custom styles */
-.jumbotron {
-    background: linear-gradient(to right, #007bff, #00c6ff);
+/* Reset */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #1a1a1a;
+    color: #fff;
+    margin: 0;
 }
 
+/* Navbar */
+.navbar {
+    background: rgba(10, 10, 10, 0.95);
+    padding: 20px 0;
+    backdrop-filter: blur(8px);
+}
 .navbar-brand {
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+}
+.navbar-brand:hover {
+    color: #00d4ff;
+}
+.nav-link {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-left: 20px;
+}
+.nav-link:hover, .nav-link.active {
+    color: #00d4ff;
+    border-bottom: 3px solid #00d4ff;
 }
 
-.btn-light:hover {
-    background-color: #f8f9fa;
-    color: #007bff;
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #1a1a1a, #333), url('https://images.unsplash.com/photo-1611162617213-7d15d84a7c86?q=80&w=1974&auto=format&fit=crop') no-repeat center center/cover;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 80px; /* Space for fixed navbar */
+}
+.btn-primary {
+    background: #00d4ff;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+.btn-primary:hover {
+    background: #00aaff;
+    transform: scale(1.05);
+}
+.btn-outline-light {
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-width: 2px;
     transition: all 0.3s ease;
+}
+.btn-outline-light:hover {
+    background: #fff;
+    color: #1a1a1a;
+    transform: scale(1.05);
+}
+
+/* Teaser Section */
+.teaser-section {
+    background: #222;
+}
+.video-wrapper {
+    position: relative;
+    padding-bottom: 20px;
+}
+video {
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Features Section */
+.feature-card {
+    background: #2a2a2a;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+.feature-card:hover {
+    transform: translateY(-8px);
+}
+
+/* Footer */
+footer {
+    background: #0a0a0a;
+    color: #aaa;
+    font-size: 1rem;
 }
