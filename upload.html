@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload - VideoHost</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">VideoHost</a>
+            <div class="d-flex align-items-center">
+                <span class="notification-bell me-2"><i class="bi bi-bell"></i><span class="badge bg-primary">1</span></span>
+                <span class="user-icon me-2"><i class="bi bi-person-circle"></i></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar" id="sidebar">
+        <button class="toggle-btn" onclick="toggleSidebar()"><i class="bi bi-chevron-right"></i></button>
+        <a href="index.html" class="nav-item"><i class="bi bi-house"></i><span class="nav-text">Home</span></a>
+        <a href="upload.html" class="nav-item active"><i class="bi bi-upload"></i><span class="nav-text">Upload</span></a>
+        <a href="videos.html" class="nav-item"><i class="bi bi-files"></i><span class="nav-text">File Manager</span></a>
+        <a href="dashboard.html" class="nav-item"><i class="bi bi-speedometer2"></i><span class="nav-text">Dashboard</span></a>
+        <a href="statistics.html" class="nav-item"><i class="bi bi-bar-chart"></i><span class="nav-text">Statistics</span></a>
+        <a href="404.html" class="nav-item"><i class="bi bi-exclamation-triangle"></i><span class="nav-text">404</span></a>
+    </div>
+
+    <!-- Upload Section -->
+    <section class="upload-section">
+        <div class="container py-5 d-flex flex-column align-items-center">
+            <h2 class="text-center mb-4 fw-bold text-white">Upload Your Content</h2>
+            <div class="upload-container">
+                <div class="upload-greeting text-center mb-3">
+                    <p class="text-white">Have a great day, [User]!</p>
+                </div>
+                <div class="upload-area">
+                    <div class="drop-zone" id="dropZone">
+                        <input type="file" class="form-control" id="video-file" accept="video/*" hidden>
+                        <i class="bi bi-upload display-3 text-primary"></i>
+                        <p class="text-white mt-2">Drag & Drop your video or <span class="text-primary fw-bold" id="browseLink">browse</span></p>
+                    </div>
+                </div>
+                <div class="upload-links mt-5">
+                    <h4 class="text-white mb-3">Your Upload Links</h4>
+                    <div class="links-box" id="linksBox">
+                        <p class="text-muted mb-0">No uploads yet—start sharing!</p>
+                        <button class="btn btn-outline-light mt-2" id="copyLinks">Copy Links</button>
+                    </div>
+                </div>
+            </div>
+            <div class="upload-perks text-center mt-5">
+                <p class="fw-bold text-white">Upload Power</p>
+                <ul class="list-unstyled text-white">
+                    <li><i class="bi bi-check-circle text-primary me-2"></i>Up to 4K Support</li>
+                    <li><i class="bi bi-check-circle text-primary me-2"></i>Fast Processing</li>
+                    <li><i class="bi bi-check-circle text-primary me-2"></i>Secure Cloud</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <footer class="text-center py-4">
+        <p>© 2025 VideoHost. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('video-file');
+        const browseLink = document.getElementById('browseLink');
+        const linksBox = document.getElementById('linksBox');
+        const copyLinks = document.getElementById('copyLinks');
+
+        browseLink.addEventListener('click', () => fileInput.click());
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.borderStyle = 'dashed';
+            dropZone.classList.add('dragover');
+        });
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.style.borderStyle = 'solid';
+            dropZone.classList.remove('dragover');
+        });
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.style.borderStyle = 'solid';
+            dropZone.classList.remove('dragover');
+            fileInput.files = e.dataTransfer.files;
+            updateLinksBox();
+        });
+        fileInput.addEventListener('change', updateLinksBox);
+
+        function updateLinksBox() {
+            if (fileInput.files.length > 0) {
+                const fileName = fileInput.files[0].name;
+                linksBox.innerHTML = `<p class="text-white">Link: <a href="#">${fileName}</a></p><button class="btn btn-outline-light mt-2" id="copyLinks">Copy Links</button>`;
+                copyLinks = linksBox.querySelector('#copyLinks');
+                copyLinks.addEventListener('click', () => {
+                    navigator.clipboard.writeText(fileName);
+                    alert('Link copied to clipboard!');
+                });
+            }
+        }
+    </script>
+</body>
+</html>
